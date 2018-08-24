@@ -1,27 +1,11 @@
 @echo off
 
-echo Calling vcvarsall.bat
-dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\"
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
-if errorlevel 1 exit /b %errorlevel%
-
-echo Echoing path after calling vcvarsall.bat
-set PATH
-
-refreshenv
-
-echo Echoing path after refreshenv
-set PATH
-
 :: Check that rc.exe is available on PATH
 where rc 1>NUL 2>&1
 if errorlevel 1 (
     echo Error: could not find rc, exiting
     exit /b 1
 )
-
-echo DEBUG: executing "where rc"
-where rc
 
 :: Check that Clang is installed
 where clang-cl 1>NUL 2>&1

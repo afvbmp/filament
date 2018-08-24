@@ -4,15 +4,14 @@
 call %~dp0ci-common.bat
 if errorlevel 1 exit /b %errorlevel%
 
+:: Put Visual Studio tools on the PATH
+echo Calling vcvarsall.bat
+call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
+if errorlevel 1 exit /b %errorlevel%
+
 :: Ensure that the necessary build tools are on the PATH
 call %~dp0validate-build-dependencies.bat
 if errorlevel 1 exit /b %errorlevel%
-
-set PATH=%PATH%;C:\Program Files (x86)\Windows Kits\8.1\bin\x64
-set PATH=%PATH%;C:\Program Files (x86)\Windows Kits\10\bin\x64
-
-echo DEBUG: Path=
-set PATH
 
 ninja --version
 clang-cl --version
